@@ -12,28 +12,28 @@ const playlistCount = Math.ceil((songCount.count - PAGE_SIZE) / PAGE_SIZE);
 ---
 
 <div
-	class="hidden md:flex flex-col text-gray-500 bg-black h-screen w-1/5 p-4 border-r border-gray-900 overflow-y-scroll scrollbar-hide"
+  class="hidden md:flex flex-col text-gray-500 bg-black h-screen w-1/5 p-4 border-r border-gray-900 overflow-y-scroll scrollbar-hide"
 >
-	<div class="space-y-6">
-		<a
-			href="/"
-			class="flex items-center space-x-4 p-3 rounded-md hover:bg-gray-800 transition-colors ease-in-out duration-300"
-		>
-			<HomeIcon />
-			<span class="text-sm font-semibold">Home</span>
-		</a>
+  <div class="space-y-6">
+    <a
+      href="/"
+      class="flex items-center space-x-4 p-3 rounded-md hover:bg-gray-800 transition-colors ease-in-out duration-300"
+    >
+      <HomeIcon />
+      <span class="text-sm font-semibold">Home</span>
+    </a>
 
-		<hr class="border-gray-700" />
+    <hr class="border-gray-700" />
 
-		<div class="flex flex-col space-y-2">
-			<span class="text-xs text-gray-400 uppercase tracking-widest pl-3">
-				My History
-			</span>
-			{
-				Array.from({ length: playlistCount }).map((_, idx) => (
-					<PlaylistEntry idx={idx + 1} />
-				))
-			}
-		</div>
-	</div>
+    <div class="flex flex-col space-y-2">
+      <span class="text-xs text-gray-400 uppercase tracking-widest pl-3">
+        My History
+      </span>
+      {
+        Array.from({ length: playlistCount }).map((_, idx) => (
+          <PlaylistEntry idx={idx + 1} />
+        ))
+      }
+    </div>
+  </div>
 </div>
