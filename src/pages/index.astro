@@ -9,76 +9,76 @@ import { colors, PAGE_SIZE } from "../lib/constants";
 const page = parseInt(Astro.url.searchParams.get("playlist") ?? "1");
 
 const [latestPlaying, ...rest] = await db
-  .select()
-  .from(listeningHistory)
-  .orderBy(desc(listeningHistory.listenedAt))
-  .offset(PAGE_SIZE * (page - 1))
-  .limit(10);
+	.select()
+	.from(listeningHistory)
+	.orderBy(desc(listeningHistory.listenedAt))
+	.offset(PAGE_SIZE * (page - 1))
+	.limit(10);
 
 if (!latestPlaying) throw new Error("No currently playing song");
 
 const color = colors[latestPlaying.artist.charCodeAt(0) % colors.length];
 
 const timeElapsed_ms =
-  Date.now() - new Date(latestPlaying.listenedAt).getTime();
+	Date.now() - new Date(latestPlaying.listenedAt).getTime();
 const song_length_ms = latestPlaying.length;
 const isPlaying = timeElapsed_ms < song_length_ms;
 ---
 
 <Layout title={`Rub's Listening - ${page}`}>
-  <div
-    class="flex-grow text-white h-screen overflow-y-scroll scrollbar-hide w-2/3"
-  >
-    <section
-      class={`flex items-end space-x-7 bg-gradient-to-b to-black ${color} h-80 text-white p-8`}
-    >
-      <img
-        class:list={[
-          "rounded-full w-32 h-32 md:w-48 md:h-48 shadow-lg",
-          { "animate-spin-slow": isPlaying },
-        ]}
-        src={latestPlaying.art}
-        alt={latestPlaying.song}
-        transition:name="art"
-      />
-      <div class="flex flex-col space-y-2">
-        <h1
-          class="text-3xl md:text-4xl lg:text-6xl font-bold"
-          transition:name="title"
-        >
-          Rub's Listening - {page}
-        </h1>
-        <h2
-          class="text-2xl md:text-3xl lg:text-5xl font-bold"
-          transition:name="title-song"
-        >
-          {latestPlaying.song}
-        </h2>
-        <p
-          class="text-lg md:text-xl text-gray-300"
-          transition:name="title-artist"
-        >
-          by: {latestPlaying.artist}
-        </p>
-      </div>
-    </section>
+	<div
+		class="flex-grow text-white h-screen overflow-y-scroll scrollbar-hide w-4/5"
+	>
+		<section
+			class={`flex items-end space-x-7 bg-gradient-to-b to-black ${color} h-80 text-white p-8`}
+		>
+			<img
+				class:list={[
+					"rounded-full w-32 h-32 md:w-48 md:h-48 shadow-lg",
+					{ "animate-spin-slow": isPlaying },
+				]}
+				src={latestPlaying.art}
+				alt={latestPlaying.song}
+				transition:name="art"
+			/>
+			<div class="flex flex-col space-y-2">
+				<h1
+					class="text-3xl md:text-4xl lg:text-6xl font-bold"
+					transition:name="title"
+				>
+					Rub's Listening - {page}
+				</h1>
+				<h2
+					class="text-2xl md:text-3xl lg:text-5xl font-bold"
+					transition:name="title-song"
+				>
+					{latestPlaying.song}
+				</h2>
+				<p
+					class="text-lg md:text-xl text-gray-300"
+					transition:name="title-artist"
+				>
+					by: {latestPlaying.artist}
+				</p>
+			</div>
+		</section>
 
-    <section class="p-8">
-      <div class="space-y-3 text-gray-400">
-        <div class="grid grid-cols-8">
-          <span class="text-center">#</span>
-          <div class="flex col-span-4 space-x-4 items-center">
-            <span class="text-center">Title</span>
-          </div>
-          <div class="hidden md:block col-span-2">Album</div>
-          <div class="justify-self-end">
-            <ClockIcon />
-          </div>
-        </div>
-        <hr class="border-gray-600" />
-        <Song song={latestPlaying} idx={1} />
-        {rest.map((song, i) => <Song {song} idx={i + 2} />)}
-      </div>
-    </section>
-  </div>
+		<section class="p-8">
+			<div class="space-y-3 text-gray-400">
+				<div class="grid grid-cols-8">
+					<span class="text-center">#</span>
+					<div class="flex col-span-4 space-x-4 items-center">
+						<span class="text-center">Title</span>
+					</div>
+					<div class="hidden md:block col-span-2">Album</div>
+					<div class="justify-self-end">
+						<ClockIcon />
+					</div>
+				</div>
+				<hr class="border-gray-600" />
+				<Song song={latestPlaying} idx={1} />
+				{rest.map((song, i) => <Song {song} idx={i + 2} />)}
+			</div>
+		</section>
+	</div>
 </Layout>
