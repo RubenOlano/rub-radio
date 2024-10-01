@@ -73,7 +73,7 @@ const isPlaying = timeElapsed_ms < song_length_ms;
 					</div>
 				</div>
 				<hr class="border-gray-600" />
-				<Song song={latestPlaying} idx={1} isPlaying={page === 1} />
+				<Song song={latestPlaying} idx={0} isPlaying={page === 1} />
 				{rest.map((song, i) => <Song {song} idx={i + 1} />)}
 			</div>
 		</section>
