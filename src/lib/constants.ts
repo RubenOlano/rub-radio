@@ -8,4 +8,4 @@ export const colors = [
   "from-red-500",
 ];
 
-export const PAGE_SIZE = 10;
+export const PAGE_SIZE = 15;
