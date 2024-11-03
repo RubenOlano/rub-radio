@@ -1,9 +1,10 @@
 ---
 import { count } from "drizzle-orm";
-import HomeIcon from "../icons/HomeIcon.astro";
 import { db, listeningHistory } from "../lib/db";
 import PlaylistEntry from "./PlaylistEntry.astro";
 import { PAGE_SIZE } from "../lib/constants";
+import AboutIcon from "../icons/AboutIcon.astro";
+import HomeIcon from "../icons/HomeIcon.astro";
 
 const [songCount] = await db.select({ count: count() }).from(listeningHistory);
 if (!songCount) throw new Error("No playlists found");
@@ -21,6 +22,13 @@ const playlistCount = Math.ceil((songCount.count - PAGE_SIZE) / PAGE_SIZE);
     >
       <HomeIcon />
       <span class="text-sm font-semibold">Home</span>
+    </a>
+    <a
+      href="/about"
+      class="flex items-center space-x-4 p-3 rounded-md hover:bg-gray-800 transition-colors ease-in-out duration-300"
+    >
+      <AboutIcon />
+      <span class="text-sm font-semibold">About</span>
     </a>
 
     <hr class="border-gray-700" />
