@@ -1,0 +1,51 @@
+---
+import { getImage } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import Me from "../assets/Me.png";
+import ClockIcon from "../icons/ClockIcon.astro";
+import { getTopArtists } from "../lib/util";
+import Artist from "../components/Artist.astro";
+
+const optimizedImage = await getImage({ src: Me, format: "webp" });
+const topArtists = await getTopArtists();
+---
+
+<Layout title="About me - Ruben Radio">
+  <div
+    class="flex-grow text-white h-screen overflow-y-scroll scrollbar-hide w-4/5 mx-auto"
+  >
+    <section
+      class="flex items-end space-x-7 bg-teal-500 h-80 text-white p-8 bg-contain bg-no-repeat bg-center w-auto"
+      style={`background-image: url(${optimizedImage.src})`}
+    >
+      <div class="flex flex-col space-y-2">
+        <h1 class="text-sm font-bold tracking-wide" transition:name="title">
+          Verified Developer ✅
+        </h1>
+        <h2
+          class="text-7xl md:text-8xl lg:text-9xl font-bold"
+          transition:name="title-song"
+        >
+          Ruben Olano
+        </h2>
+      </div>
+    </section>
+    <section class="p-8 space-y-5">
+      <span class="text-2xl font-bold">Top Artists This Month</span>
+      <div class="space-y-3 text-gray-400">
+        <div class="grid grid-cols-8">
+          <span class="text-center">#</span>
+          <div class="flex col-span-4 space-x-4 items-center">
+            <span class="text-center">Artist</span>
+          </div>
+          <div class="hidden md:block col-span-2"># of Songs</div>
+          <div class="justify-self-end">
+            <ClockIcon />
+          </div>
+        </div>
+        <hr class="border-gray-600" />
+        {topArtists.map((artist, i) => <Artist artist={artist} idx={i} />)}
+      </div>
+    </section>
+  </div>
+</Layout>

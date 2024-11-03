@@ -13,6 +13,7 @@ export const listeningHistory = pgTable("listeningHistory", {
     mode: "date",
     withTimezone: true,
   }).notNull(),
+  artistImage: text("artistImage"),
 });
 
 const client = postgres(import.meta.env.DB_URL!, { prepare: false });
