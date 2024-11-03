@@ -8,6 +8,6 @@ export const colors = [
   "from-red-500",
 ];
 
-export const PAGE_SIZE = 50;
+export const PAGE_SIZE = 10;
 
 export const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
