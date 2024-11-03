@@ -74,7 +74,11 @@ const title = page === 1 ? "Rub Radio" : `Rub Radio - ${page}`;
             <span class="text-center">Title</span>
           </div>
           <div class="hidden md:block col-span-2">Album</div>
-          <div class="justify-self-end">
+          <div
+            class="justify-self-end"
+            aria-label="Song Length"
+            title="Song Length"
+          >
             <ClockIcon />
           </div>
         </div>

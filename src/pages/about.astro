@@ -39,7 +39,11 @@ const topArtists = await getTopArtists();
             <span class="text-center">Artist</span>
           </div>
           <div class="hidden md:block col-span-2"># of Songs</div>
-          <div class="justify-self-end">
+          <div
+            class="justify-self-end"
+            aria-label="Time Spent Listening"
+            title="Time Spent Listening"
+          >
             <ClockIcon />
           </div>
         </div>
